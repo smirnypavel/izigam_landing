@@ -1,0 +1,663 @@
+.footer {
+    padding-bottom: 16px;
+    background: var(--color-dark);
+  }
+  
+  .container {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .content {
+    position: relative;
+    background-color: var(--color-gray-800);
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .logo {
+    display: block;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 16px;
+  }
+  
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform-origin: center;
+    transition: transform var(--global-transition-duration);
+  }
+  
+  .logo:hover img {
+    transform: rotate(90deg);
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: calc(100% - 50px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu li:not(:first-child) {
+    border-top: 1px solid var(--color-gray-400);
+  }
+  
+  .menu a {
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+    text-align: center;
+    transition: color var(--global-transition-duration);
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .menu a:hover {
+    color: var(--color-light);
+  }
+  
+  .menuItemHasChildren > a {
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .menuItemHasChildren > a svg {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: #5f5f5f;
+    transition: transform var(--global-transition-duration), stroke var(--global-transition-duration);
+  }
+  
+  .menuItemHasChildren.active > a {
+    color: var(--color-light);
+  }
+  
+  .menuItemHasChildren.active > a svg {
+    transform: rotate(180deg);
+    stroke: var(--color-light);
+  }
+  
+  .menuItemHasChildren > ul {
+    display: none;
+    overflow: hidden;
+    will-change: height;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .submenuOpen {
+    display: block !important;
+    max-height: 200px;
+    transition: max-height 0.3s ease;
+  }
+  
+  .submenuOpen li {
+    padding-left: 8px;
+    border-top: 1px solid var(--color-gray-400);
+  }
+  
+  .submenuOpen li:first-child {
+    padding-top: 8px;
+  }
+  
+  .submenuOpen li:not(:first-child) {
+    margin-top: 8px;
+  }
+  
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  
+  .links a {
+    display: block;
+    width: 42px;
+    height: 42px;
+    background-color: var(--color-gray-400);
+    border-radius: 8px;
+    transition: background-color var(--global-transition-duration);
+  }
+  
+  .links a svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--color-gray-200);
+    transition: fill var(--global-transition-duration);
+  }
+  
+  .links a:hover {
+    background-color: #fa99ff;
+  }
+  
+  .links a:hover svg {
+    fill: #3e1940;
+  }
+  
+  .smTitle {
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 8px;
+  }
+  
+  .download,
+  .form {
+    margin-top: 32px;
+  }
+  
+  .downloadButtons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .storeButton {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    position: relative;
+    background-color: rgba(250, 153, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 18px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    color: #fa99ff;
+    padding: 9px 16px 9px 44px;
+    cursor: pointer;
+    transition: background-color var(--global-transition-duration), color var(--global-transition-duration);
+    text-decoration: none;
+    border: none;
+  }
+  
+  .storeButton svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    fill: #fa99ff;
+    transition: fill var(--global-transition-duration);
+  }
+  
+  .storeButton:hover {
+    background-color: #fa99ff;
+    color: #3e1940;
+  }
+  
+  .storeButton:hover svg {
+    fill: #3e1940;
+  }
+  
+  .subscribeForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .input {
+    height: 35px;
+    background-color: var(--color-gray-400);
+    border-radius: 18px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 0 16px;
+    flex: 1;
+    min-width: 200px;
+    border: none;
+    color: var(--color-light);
+  }
+  
+  .input::placeholder {
+    transition: opacity var(--global-transition-duration);
+    color: var(--color-gray-300);
+  }
+  
+  .input:focus::placeholder {
+    opacity: 0;
+  }
+  
+  .button {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    background-color: rgba(189, 182, 255, 0.4);
+    border-radius: 17px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--color-blue-200);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color var(--global-transition-duration), color var(--global-transition-duration);
+    border: none;
+  }
+  
+  .button:hover {
+    background-color: #fa99ff;
+    color: #3e1940;
+  }
+  
+  .info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-weight: 500;
+    color: var(--color-gray-350);
+  }
+  
+  .contacts {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .contacts p {
+    width: calc(50% - 10px);
+    margin: 0;
+  }
+  
+  .contacts a {
+    display: block;
+    transition: color var(--global-transition-duration);
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .contacts a:hover {
+    color: var(--color-light);
+  }
+  
+  .copyright {
+    width: 100%;
+    margin: 0;
+  }
+  
+  /* Responsive Styles */
+  @media screen and (min-width: 768px) {
+    .footer {
+      padding-bottom: 30px;
+    }
+  
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px 10px;
+      border-radius: 40px;
+      padding: 60px 20px;
+    }
+  
+    .menu {
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 10px;
+      margin-right: auto;
+      margin-top: 0;
+    }
+  
+    .menu li:not(:first-child) {
+      border: none;
+    }
+  
+    .menuItemHasChildren > a svg {
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+    }
+  
+    .menuItemHasChildren {
+      position: relative;
+    }
+  
+    .menuItemHasChildren > a[href="#"] {
+      pointer-events: none;
+    }
+  
+    .menuItemHasChildren > ul {
+      display: block !important;
+      overflow: unset;
+      position: absolute;
+      top: calc(100% + 24px);
+      right: 0;
+      visibility: hidden;
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(40px);
+      border: 1px solid var(--color-gray-400);
+      border-radius: 20px;
+      transition: visibility var(--global-transition-duration), opacity var(--global-transition-duration);
+      width: fit-content;
+      min-width: 200px;
+    }
+  
+    .menuItemHasChildren:hover > ul {
+      visibility: visible;
+      opacity: 1;
+    }
+  
+    .menuItemHasChildren > ul::before {
+      content: '';
+      width: 100%;
+      height: 24px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(-100%);
+    }
+  
+    .menuItemHasChildren > ul li {
+      padding-left: 0;
+      border-top: 1px solid var(--color-gray-400);
+    }
+  
+    .menuItemHasChildren > ul li:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+  
+    .menuItemHasChildren > ul li:not(:first-child) {
+      margin-top: 0;
+    }
+  
+    .menuItemHasChildren > ul li > a {
+      white-space: nowrap;
+      padding: 11px;
+    }
+  
+    .menuItemHasChildren:hover > a {
+      color: var(--color-light);
+    }
+  
+    .menuItemHasChildren:hover > a svg {
+      transform: rotate(180deg);
+      stroke: var(--color-light);
+    }
+  
+    .links {
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 10px;
+      position: unset;
+    }
+  
+    .smTitle {
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 10px;
+    }
+  
+    .form {
+      width: 100%;
+      max-width: 49.432%;
+      margin-top: 0;
+    }
+  
+    .download {
+      order: 1;
+      margin-left: auto;
+      text-align: right;
+      margin-top: 0;
+    }
+  
+    .downloadButtons {
+      flex-direction: row-reverse;
+      gap: 10px;
+    }
+  
+    .storeButton {
+      border-radius: 21px;
+      font-size: 18px;
+      line-height: 22px;
+      padding: 10px 20px 10px 48px;
+    }
+  
+    .storeButton svg {
+      left: 20px;
+    }
+  
+    .subscribeForm {
+      gap: 10px;
+    }
+  
+    .input {
+      border-radius: 21px;
+      height: 42px;
+      font-size: 20px;
+      line-height: 20px;
+      max-width: calc(100% - 135px);
+    }
+  
+    .button {
+      border-radius: 21px;
+      font-size: 18px;
+      line-height: 22px;
+      padding: 10px 20px;
+    }
+  
+    .info {
+      justify-content: space-between;
+      font-size: 18px;
+      line-height: 22px;
+      margin-top: 20px;
+    }
+  
+    .contacts {
+      gap: 10px;
+    }
+  
+    .contacts,
+    .copyright,
+    .contacts p {
+      width: fit-content;
+    }
+  
+    .contacts a {
+      display: inline;
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .content {
+      border-radius: 60px;
+      padding-left: 110px;
+      padding-right: 110px;
+    }
+  
+    .form {
+      max-width: 40.655%;
+    }
+  }
+  
+  /* Additional hover effects for better UX */
+  @media (hover: hover) {
+    .logo:hover img {
+      transform: rotate(90deg);
+    }
+  
+    .menu a:hover {
+      color: var(--color-light);
+    }
+  
+    .links a:hover {
+      background-color: #fa99ff;
+    }
+  
+    .links a:hover svg {
+      fill: #3e1940;
+    }
+  
+    .contacts a:hover {
+      color: var(--color-light);
+    }
+  
+    .storeButton:hover {
+      background-color: #fa99ff;
+      color: #3e1940;
+      transform: translateY(-2px);
+    }
+  
+    .storeButton:hover svg {
+      fill: #3e1940;
+    }
+  
+    .button:hover {
+      background-color: #fa99ff;
+      color: #3e1940;
+      transform: translateY(-1px);
+    }
+  }
+  
+  /* Focus states for accessibility */
+  .input:focus,
+  .button:focus,
+  .storeButton:focus {
+    outline: 2px solid #fa99ff;
+    outline-offset: 2px;
+  }
+  
+  .menu a:focus,
+  .contacts a:focus,
+  .links a:focus {
+    outline: 2px solid #fa99ff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Loading state for form submission */
+  .button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .button:disabled:hover {
+    transform: none;
+    background-color: rgba(189, 182, 255, 0.4);
+    color: var(--color-blue-200);
+  }
+  
+  /* Responsive adjustments for very small screens */
+  @media screen and (max-width: 480px) {
+    .container {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  
+    .content {
+      padding: 12px;
+    }
+  
+    .downloadButtons {
+      flex-direction: column;
+      gap: 6px;
+    }
+  
+    .storeButton {
+      font-size: 12px;
+      padding: 8px 14px 8px 38px;
+    }
+  
+    .storeButton svg {
+      width: 16px;
+      height: 16px;
+      left: 12px;
+    }
+  
+    .contacts {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .contacts p {
+      width: 100%;
+    }
+  
+    .input {
+      min-width: 150px;
+      font-size: 14px;
+    }
+  
+    .button {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+  
+    .smTitle {
+      font-size: 14px;
+      line-height: 16px;
+    }
+  }
+  
+  /* Animation for the logo rotation */
+  @keyframes logoRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(90deg);
+    }
+  }
+  
+  
+  
+  /* Ensure proper spacing for elements */
+  .footer > * + * {
+    margin-top: 1rem;
+  }
+  
+  /* Style for error states */
+ 
+  
+  .input:invalid:focus {
+    outline-color: #fa99ff;
+  }
+  
+  /* Success state for form */
+  .subscribeForm.success .input {
+    border: 1px solid #51cf66;
+  }
+  
+  .subscribeForm.success .button {
+    background-color: #51cf66;
+    color: white;
+  }
+  
+  /* Loading spinner for button */
+  .button.loading::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin-left: 8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+      

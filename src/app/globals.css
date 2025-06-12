@@ -1,0 +1,178 @@
+:root {
+  /* Colors */
+  --color-light: #ffffff;
+  --color-dark: #000000;
+  --color-gray-200: #d1d1d1;
+  --color-gray-300: #7d7d7d;
+  --color-gray-350: #5f5f5f;
+  --color-gray-400: #383838;
+  --color-gray-700: #212121;
+  --color-gray-800: #1b1b1b;
+  --color-blue-200: #bdb6ff;
+
+  /* Typography */
+  --main-font-family: var(--font-neue-montreal), system-ui, -apple-system, sans-serif;
+  
+  /* Transitions */
+  --global-transition-duration: 0.3s;
+
+  /* Body */
+  --body-background-color: var(--color-dark);
+  --body-font-family: var(--main-font-family);
+  --body-font-weight: 400;
+  --body-font-size: 16px;
+  --body-line-height: 1.4;
+  --body-text-color: var(--color-light);
+}
+
+/* Reset styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+/* Smooth Scrolling */
+:global(html) {
+  scroll-behavior: smooth;
+}
+
+/* Section Anchors */
+:global(section[id]) {
+  scroll-margin-top: 100px;
+}
+
+/* Loading States */
+:global(body:not(.loaded)) .main section {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+:global(body.loaded) .main section {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body {
+  min-height: 100vh;
+  background-color: var(--body-background-color);
+  font-family: var(--body-font-family);
+  font-weight: var(--body-font-weight);
+  font-size: var(--body-font-size);
+  line-height: var(--body-line-height);
+  color: var(--body-text-color);
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--body-background-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #fd99bc;
+  border-radius: 5px;
+}
+
+/* Remove default styles */
+h1, h2, h3, h4, h5, h6, p, ul, ol, pre {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: none;
+}
+
+img, video, svg, iframe {
+  max-width: 100%;
+  display: block;
+}
+
+/* Global animations */
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@keyframes cursorFlicker {
+  0%, 25% {
+    opacity: 1;
+  }
+  50%, 75% {
+    opacity: 0;
+  }
+}
+
+/* Utility classes */
+.fw-300 { font-weight: 300; }
+.fw-400 { font-weight: 400; }
+.fw-500 { font-weight: 500; }
+.fw-700 { font-weight: 700; }
+
+.text-center { text-align: center; }
+
+.text-color-light { color: var(--color-light); }
+.text-color-gray-200 { color: var(--color-gray-200); }
+.text-color-gray-300 { color: var(--color-gray-300); }
+.text-color-gray-350 { color: var(--color-gray-350); }
+.text-color-blue-200 { color: var(--color-blue-200); }
+
+@media screen and (min-width: 768px) {
+  .text-center-md { text-align: center; }
+}
+
+/* Responsive typography */
+@media screen and (min-width: 768px) {
+  :root {
+    --body-font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+    --body-font-size: 20px;
+  }
+}

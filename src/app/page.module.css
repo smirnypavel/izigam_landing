@@ -1,0 +1,152 @@
+/* page.module.css */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #000000;
+  color: #ffffff;
+}
+
+.main {
+  flex: 1;
+  padding-top: 80px; /* Account for fixed header */
+}
+
+/* Section Spacing */
+.main section {
+  position: relative;
+  z-index: 1;
+}
+
+.main section:not(:first-child) {
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    padding-top: 90px;
+  }
+  
+  .main section:not(:first-child) {
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .main {
+    padding-top: 100px;
+  }
+  
+  .main section:not(:first-child) {
+    margin-top: 4rem;
+  }
+}
+
+/* Back to Top Button */
+.backToTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(135deg, #a399ff, #fa99ff);
+  border: none;
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(250, 153, 255, 0.3);
+}
+
+.backToTop.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.backToTop:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(250, 153, 255, 0.4);
+  background: linear-gradient(135deg, #b3a9ff, #ff4caf);
+}
+
+.backToTop:active {
+  transform: translateY(0);
+}
+
+.backToTop svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 2.5;
+}
+
+
+
+/* Parallax Effect for Background Elements */
+@media (prefers-reduced-motion: no-preference) {
+  .main section:nth-child(even) {
+    position: relative;
+  }
+  
+  .main section:nth-child(even)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(163, 153, 255, 0.03) 0%,
+      transparent 50%
+    );
+    z-index: -1;
+    animation: float 20s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Mobile Optimizations */
+@media screen and (max-width: 767px) {
+  .backToTop {
+    bottom: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .backToTop svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .main section:nth-child(even)::before {
+    animation: none;
+  }
+  
+  .backToTop {
+    transition-duration: 0.1s;
+  }
+  
+ 
+}

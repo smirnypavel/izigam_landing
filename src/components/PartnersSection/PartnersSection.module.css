@@ -1,0 +1,333 @@
+.section {
+    opacity: 0;
+    transition: opacity var(--global-transition-duration);
+  }
+  
+  :global(.loaded) .section {
+    opacity: 1;
+  }
+  
+  .bottomSpacing {
+    padding-bottom: 6.25rem; /* 100px */
+  }
+  
+  @media screen and (min-width: 768px) {
+    .bottomSpacing {
+      padding-bottom: 10rem; /* 160px */
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .bottomSpacing {
+      padding-bottom: 12.5rem; /* 200px */
+    }
+  }
+  
+  .container {
+    width: 100%;
+    padding-left: 1.25rem; /* 20px */
+    padding-right: 1.25rem; /* 20px */
+  }
+  
+  @media screen and (min-width: 576px) {
+    .container {
+      max-width: 22.5rem; /* 360px */
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    .container {
+      max-width: 100%;
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .container {
+      max-width: 83.125rem; /* 1330px */
+    }
+  }
+  
+  .partnersWrapper {
+    width: 100%;
+    margin-top: 2.5rem; /* 40px */
+  }
+  
+  .partnersTopRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem; /* 20px */
+    margin-bottom: 1.25rem; /* 20px */
+  }
+  
+  .partnersTopRow .partnerCard {
+    flex: 1;
+    height: 9.375rem; /* 150px */
+    border-radius: 0.75rem; /* 12px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .partnersBottomRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem; /* 20px */
+  }
+  
+  .partnersBottomRow .partnerCard {
+    width: calc(20% - 1rem); /* 16px */
+    height: 9.375rem; /* 150px */
+    border-radius: 0.75rem; /* 12px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Новый стиль для обертки изображения */
+  .imageWrapper {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    z-index: 1;
+  }
+  
+  .partnerCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .partnerCard:hover {
+    transform: translateY(-0.3125rem); /* -5px */
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .partnerCard:hover::before {
+    opacity: 1;
+  }
+  
+  .partnerCard:hover .imageWrapper {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+  }
+  
+  .partnersTitle {
+    width: calc(40% - 1rem); /* 16px */
+    text-align: center;
+  }
+  
+  .partnersTitle h3 {
+    font-weight: 700;
+    font-size: 2rem; /* 32px */
+    line-height: 2.375rem; /* 38px */
+    color: #ffffff;
+    margin: 0;
+    background: linear-gradient(90deg, #e9e9e9 0%, #fdd7ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .partnerPlaceholder {
+    padding: 0.9375rem; /* 15px */
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 1200px) {
+    .partnersTopRow .partnerCard,
+    .partnersBottomRow .partnerCard {
+      max-height: 8.75rem; /* 140px */
+    }
+  
+    .partnersTitle h3 {
+      font-size: 1.75rem; /* 28px */
+      line-height: 2.125rem; /* 34px */
+    }
+  }
+  
+  @media screen and (max-width: 991px) {
+    .partnersTopRow {
+      gap: 0.9375rem; /* 15px */
+    }
+  
+    .partnersBottomRow {
+      gap: 0.9375rem; /* 15px */
+      flex-wrap: wrap;
+    }
+  
+    .partnersTitle {
+      width: 100%;
+      order: -1;
+      margin-bottom: 0.9375rem; /* 15px */
+    }
+  
+    .partnersBottomRow .partnerCard {
+      width: calc(25% - 0.75rem); /* 12px */
+      height: 7.5rem; /* 120px */
+    }
+  
+    .partnersTopRow .partnerCard {
+      height: 7.5rem; /* 120px */
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .partnersWrapper {
+      margin-top: 1.875rem; /* 30px */
+    }
+  
+    /* Добавляем заголовок перед рядами на мобильных */
+    .partnersWrapper::before {
+      content: 'Partners';
+      display: block;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.5rem; /* 24px */
+      line-height: 1.75rem; /* 28px */
+      color: #ffffff;
+      margin-bottom: 1.25rem; /* 20px */
+      background: linear-gradient(90deg, #e9e9e9 0%, #fdd7ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  
+    .partnersTopRow {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.625rem; /* 10px */
+      margin-bottom: 0.625rem; /* 10px */
+    }
+  
+    .partnersTopRow .partnerCard {
+      width: 100%;
+      height: 6.25rem; /* 100px */
+    }
+  
+    .partnersBottomRow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.625rem; /* 10px */
+    }
+  
+    .partnersBottomRow .partnerCard {
+      width: 100%;
+      height: 6.25rem; /* 100px */
+    }
+  
+    /* Скрываем старый заголовок */
+    .partnersTitle {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .partnersWrapper {
+      margin-top: 1.25rem; /* 20px */
+    }
+  
+    .container {
+      padding-left: 1rem; /* 16px */
+      padding-right: 1rem; /* 16px */
+    }
+  
+    .partnersWrapper::before {
+      font-size: 1.25rem; /* 20px */
+      line-height: 1.5rem; /* 24px */
+      margin-bottom: 1rem; /* 16px */
+    }
+  
+    .partnersTopRow .partnerCard,
+    .partnersBottomRow .partnerCard {
+      height: 5rem; /* 80px */
+    }
+  
+    .partnersTopRow {
+      gap: 0.5rem; /* 8px */
+      margin-bottom: 0.5rem; /* 8px */
+    }
+  
+    .partnersBottomRow {
+      gap: 0.5rem; /* 8px */
+    }
+  
+    /* Изменяем размер обертки изображения на мобильных устройствах */
+    .imageWrapper {
+      width: 60%;
+      height: 60%;
+    }
+  }
+  
+  /* Дополнительные правила для очень маленьких экранов */
+  @media screen and (max-width: 360px) {
+    .partnersWrapper::before {
+      font-size: 1.125rem; /* 18px */
+      line-height: 1.375rem; /* 22px */
+    }
+  
+    .partnersTopRow .partnerCard,
+    .partnersBottomRow .partnerCard {
+      height: 4.5rem; /* 72px */
+    }
+  
+    .imageWrapper {
+      width: 55%;
+      height: 55%;
+    }
+  }
+  
+  /* Loading animation */
+  @keyframes shimmer {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }
+  
+  .partnerCard::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.03),
+      transparent
+    );
+    background-size: 200px 100%;
+    animation: shimmer 3s infinite;
+    opacity: 0;
+  }
+  
+  .partnerCard:hover::after {
+    opacity: 1;
+  }

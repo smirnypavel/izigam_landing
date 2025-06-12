@@ -1,0 +1,611 @@
+/* Base styles */
+.section {
+  opacity: 0;
+  transition: opacity var(--global-transition-duration);
+}
+
+:global(.loaded) .section {
+  opacity: 1;
+}
+
+.bottomSpacing {
+  padding-bottom: 6.25rem; /* 100px */
+}
+
+@media screen and (min-width: 768px) {
+  .bottomSpacing {
+    padding-bottom: 10rem; /* 160px */
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .bottomSpacing {
+    padding-bottom: 12.5rem; /* 200px */
+  }
+}
+
+.container {
+  width: 100%;
+  padding-left: 1.25rem; /* 20px */
+  padding-right: 1.25rem; /* 20px */
+}
+
+@media screen and (min-width: 576px) {
+  .container {
+    max-width: 22.5rem; /* 360px */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 83.125rem; /* 1330px */
+  }
+}
+
+.titleWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+/* Медиазапросы для мобильных устройств titleWrapper */
+@media (max-width: 768px) {
+  .titleWrapper {
+    flex-direction: column;
+    gap: 0.5rem; /* 8px */
+    margin-bottom: 1rem; /* 16px */
+  }
+}
+
+@media (max-width: 480px) {
+  .titleWrapper {
+    flex-direction: column;
+    gap: 0.25rem; /* 4px */
+    margin-bottom: 0.75rem; /* 12px */
+    text-align: center;
+  }
+}
+
+.title {
+  width: fit-content;
+  max-width: 100%;
+  background: linear-gradient(90deg, #e9e9e9 0%, #fdd7ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.8125rem; /* 29px */
+  color: transparent;
+}
+
+.titleAnimation {
+  background-image: linear-gradient(45deg, #a399ff, #fd99bc, #a399ff, #fa99ff);
+  background-size: 200%;
+  animation: textShine 3s linear infinite alternate;
+}
+
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 2.5rem; /* 40px */
+    line-height: 3rem; /* 48px */
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.5rem; /* 24px */
+  }
+}
+
+/* Ambassadors Section */
+.ambassadorsSection {
+  position: relative;
+  border-radius: 2rem; /* 32px */
+  background-color: #160017eb;
+  border: 0.125rem solid #542a56; /* 2px */
+  overflow: hidden;
+  width: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(84, 42, 86, 0.5) 0.0625rem, transparent 0.0625rem), /* 1px */
+    linear-gradient(to bottom, rgba(84, 42, 86, 0.5) 0.0625rem, transparent 0.0625rem); /* 1px */
+  background-size: 2.5rem 2.5rem; /* 40px 40px */
+  max-height: 50rem; /* 800px */
+  transition: max-height 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.ambassadorsSection.collapsed {
+  max-height: 6.25rem; /* 100px */
+  overflow: hidden;
+  position: relative;
+}
+
+.ambassadorsSection.collapsed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6.25rem; /* 100px */
+  background: linear-gradient(to bottom, rgba(22, 0, 23, 0) 0%, rgba(22, 0, 23, 1) 100%);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.ambassadorsSection:not(.collapsed)::after {
+  opacity: 0;
+}
+
+.ambassadorsExpanded {
+  position: relative;
+  padding: 1.875rem; /* 30px */
+  overflow: hidden;
+}
+
+.ambassadorsScrollContainer {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  position: relative;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  cursor: grab;
+}
+
+.ambassadorsScrollContainer:active {
+  cursor: grabbing;
+}
+
+.ambassadorsScrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.ambassadorsRows {
+  display: flex;
+  flex-direction: column;
+  gap: 6.25rem; /* 100px */
+  padding: 2.5rem 0; /* 40px */
+  min-width: 300%; /* Увеличено для бесшовности */
+  padding-left: 5%;
+  padding-right: 5%;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.ambassadorRow {
+  display: flex;
+  min-width: max-content;
+  position: relative;
+  padding: 0 3.125rem; /* 50px */
+}
+
+.row1 {
+  animation: scrollAnimationRow1 120s linear infinite;
+}
+
+.row2 {
+  animation: scrollAnimationRow2 120s linear infinite;
+  animation-delay: -60s;
+}
+
+@keyframes scrollAnimationRow1 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollAnimationRow2 {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.ambassadorRow .ambassadorCard:nth-child(odd) {
+  transform: translateY(-2.5rem); /* -40px */
+}
+
+.ambassadorRow .ambassadorCard:nth-child(even) {
+  transform: translateY(2.5rem); /* 40px */
+}
+
+.ambassadorRow .ambassadorCard:nth-child(odd):hover {
+  transform: translateY(-2.5rem) scale(1.05); /* -40px */
+}
+
+.ambassadorRow .ambassadorCard:nth-child(even):hover {
+  transform: translateY(2.5rem) scale(1.05); /* 40px */
+}
+
+.ambassadorRow:hover {
+  animation-play-state: paused;
+}
+
+.ambassadorCard {
+  position: relative;
+  width: 13.0625rem; /* 209px */
+  height: 13.0625rem; /* 209px */
+  cursor: pointer;
+  margin-right: 3.125rem; /* 50px */
+  transition: transform 0.3s ease;
+}
+
+.ambassadorCard.active {
+  z-index: 5;
+}
+
+.hexagonBorder {
+  position: relative;
+  width: 15.125rem; /* 242px */
+  height: 15.125rem; /* 242px */
+  background: linear-gradient(45deg, #a399ff, #ff3cac);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hexagonContent {
+  width: 98%;
+  height: 98%;
+  background-color: #160017;
+  clip-path: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.hexagonContent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(163, 153, 255, 0.1), transparent 70%);
+  z-index: 1;
+}
+
+.hexagonContent img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.ambassadorInfo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  color: white;
+  padding: 0.625rem; /* 10px */
+  text-align: center;
+  z-index: 10;
+  text-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.8); /* 10px */
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.ambassadorCard:hover .ambassadorInfo {
+  opacity: 1;
+}
+
+.ambassadorCard:hover .hexagonContent img {
+  transform: scale(1.1);
+  filter: brightness(0.7);
+}
+
+.ambassadorCard.active .ambassadorInfo {
+  opacity: 1;
+}
+
+.ambassadorUsername {
+  font-weight: bold;
+  font-size: 1.375rem; /* 22px */
+  margin-bottom: 0.3125rem; /* 5px */
+}
+
+.ambassadorFollowers {
+  font-size: 1.125rem; /* 18px */
+}
+
+.linkIcon {
+  position: absolute;
+  right: 38%;
+  bottom: 0.625rem; /* 10px */
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+  border-radius: 100%;
+  background-color: rgba(30, 30, 30, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition: opacity 0.3s ease;
+}
+
+.ambassadorsFadeLeft,
+.ambassadorsFadeRight {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 6.25rem; /* 100px */
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ambassadorsFadeLeft::after,
+.ambassadorsFadeRight::after {
+  content: "";
+  width: 2rem; /* 32px */
+  height: 2rem; /* 32px */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.ambassadorsFadeLeft:hover::after,
+.ambassadorsFadeRight:hover::after {
+  opacity: 1;
+}
+
+@keyframes fadeEdge {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.ambassadorsFadeLeft {
+  left: 0;
+  background: linear-gradient(to right, rgba(22, 0, 23, 1) 0%, rgba(22, 0, 23, 0.8) 25%, rgba(22, 0, 23, 0.4) 50%, rgba(22, 0, 23, 0.1) 75%, rgba(22, 0, 23, 0) 100%);
+  animation: fadeEdge 3s infinite ease-in-out;
+}
+
+.ambassadorsFadeRight {
+  right: 0;
+  background: linear-gradient(to left, rgba(22, 0, 23, 1) 0%, rgba(22, 0, 23, 0.8) 25%, rgba(22, 0, 23, 0.4) 50%, rgba(22, 0, 23, 0.1) 75%, rgba(22, 0, 23, 0) 100%);
+  animation: fadeEdge 3s infinite ease-in-out;
+}
+
+.ambassadorsToggleBtn {
+  position: absolute;
+  bottom: 1.25rem; /* 20px */
+  right: 1.25rem; /* 20px */
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5rem; /* 8px */
+  padding: 0.5rem 1rem; /* 8px 16px */
+  border-radius: 1.25rem; /* 20px */
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.3); /* 1px */
+  color: white;
+  font-size: 0.875rem; /* 14px */
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+}
+
+.ambassadorsToggleBtn:hover {
+  background-color: rgba(250, 153, 255, 0.3);
+  border-color: rgba(250, 153, 255, 0.6);
+}
+
+.ambassadorsToggleBtn svg {
+  transition: transform 0.3s ease;
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+  fill: none;
+  stroke: currentColor;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .ambassadorsSection {
+    max-height: 37.5rem; /* 600px */
+  }
+
+  .ambassadorsExpanded {
+    height: 37.5rem; /* 600px */
+  }
+
+  .hexagonBorder {
+    width: 10rem; /* 160px */
+    height: 10rem; /* 160px */
+  }
+
+  .ambassadorCard {
+    width: 11.25rem; /* 180px */
+    height: 11.25rem; /* 180px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(odd) {
+    transform: translateY(-1.875rem); /* -30px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(even) {
+    transform: translateY(1.875rem); /* 30px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(odd):hover {
+    transform: translateY(-1.875rem) scale(1.05); /* -30px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(even):hover {
+    transform: translateY(1.875rem) scale(1.05); /* 30px */
+  }
+
+  .ambassadorsSection.collapsed {
+    max-height: 11.25rem; /* 180px */
+  }
+
+  .row1,
+  .row2 {
+    animation-duration: 100s;
+  }
+}
+
+@media (max-width: 768px) {
+  .ambassadorsSection {
+    max-height: 32.5rem; /* 520px */
+  }
+
+  .ambassadorsExpanded {
+    height: 32.5rem; /* 520px */
+  }
+
+  .ambassadorCard {
+    width: 7.5rem; /* 120px */
+    height: 7.5rem; /* 120px */
+    margin-right: 1.25rem; /* 20px */
+  }
+
+  .hexagonBorder {
+    width: 7.5rem; /* 120px */
+    height: 7.5rem; /* 120px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(odd) {
+    transform: translateY(-1.25rem); /* -20px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(even) {
+    transform: translateY(1.25rem); /* 20px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(odd):hover {
+    transform: translateY(-1.25rem) scale(1.05); /* -20px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(even):hover {
+    transform: translateY(1.25rem) scale(1.05); /* 20px */
+  }
+
+  .ambassadorUsername {
+    font-size: 1rem; /* 16px */
+  }
+
+  .ambassadorFollowers {
+    font-size: 0.75rem; /* 12px */
+  }
+
+  .ambassadorsSection.collapsed {
+    max-height: 9.375rem; /* 150px */
+  }
+
+  .ambassadorsFadeLeft,
+  .ambassadorsFadeRight {
+    width: 3.75rem; /* 60px */
+  }
+
+  .ambassadorsFadeLeft::after,
+  .ambassadorsFadeRight::after {
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
+  }
+
+  .ambassadorsToggleBtn {
+    padding: 0.375rem 0.75rem; /* 6px 12px */
+    font-size: 0.75rem; /* 12px */
+  }
+
+  .row1,
+  .row2 {
+    animation-duration: 80s;
+  }
+}
+
+@media (max-width: 480px) {
+  .ambassadorsSection {
+    max-height: 28.75rem; /* 460px */
+  }
+
+  .ambassadorsExpanded {
+    height: 28.75rem; /* 460px */
+  }
+
+  .ambassadorCard {
+    width: 6rem; /* 96px */
+    height: 6rem; /* 96px */
+    margin-right: 0.9375rem; /* 15px */
+  }
+
+  .hexagonBorder {
+    width: 6rem; /* 96px */
+    height: 6rem; /* 96px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(odd) {
+    transform: translateY(-0.9375rem); /* -15px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(even) {
+    transform: translateY(0.9375rem); /* 15px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(odd):hover {
+    transform: translateY(-0.9375rem) scale(1.05); /* -15px */
+  }
+
+  .ambassadorRow .ambassadorCard:nth-child(even):hover {
+    transform: translateY(0.9375rem) scale(1.05); /* 15px */
+  }
+
+  .ambassadorsSection.collapsed {
+    max-height: 7.5rem; /* 120px */
+  }
+
+  .row1,
+  .row2 {
+    animation-duration: 60s;
+  }
+
+  .ambassadorsFadeLeft,
+  .ambassadorsFadeRight {
+    width: 3.125rem; /* 50px */
+  }
+
+  .ambassadorUsername {
+    font-size: 0.875rem; /* 14px */
+  }
+
+  .ambassadorFollowers {
+    font-size: 0.625rem; /* 10px */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row1,
+  .row2 {
+    animation-duration: 240s;
+  }
+}

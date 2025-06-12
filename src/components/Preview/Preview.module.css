@@ -1,0 +1,554 @@
+/* CSS Variables */
+.preview {
+    --global-transition-duration: 0.3s;
+    --color-gray-300: #7d7d7d;
+  }
+  
+  .container {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .preview {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    background: url('/img/preview/lines.svg') top center / cover no-repeat;
+    border-radius: 24px;
+    padding: 174px 0 10px;
+  }
+  
+  .preview:before,
+  .preview:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .preview:before {
+    z-index: -1;
+    opacity: 0;
+    background: url('/img/preview/glow.svg') top center / cover no-repeat;
+    transition: opacity var(--global-transition-duration) linear;
+  }
+  
+  .preview.active:before {
+    opacity: 1;
+  }
+  
+  .preview:after {
+    z-index: 1;
+    border: 2px solid rgba(36, 36, 36, 0.8);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  .previewContent {
+    width: 100%;
+    padding: 0 24px;
+  }
+  
+  .previewText {
+    height: 19px;
+    background-image: linear-gradient(90deg, #e9e9e9 0%, #fdd7ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: transparent;
+    text-align: center;
+  }
+  
+  .previewText:after {
+    content: '';
+    display: inline-block;
+    vertical-align: bottom;
+    width: 1px;
+    height: 19px;
+    opacity: 0;
+    background-image: linear-gradient(90deg, #e9e9e9 0%, #fdd7ff 100%);
+    margin-left: 2px;
+  }
+  
+  .previewText.textActive:after {
+    animation: cursorFlicker 1s infinite;
+  }
+  
+  .previewTitleWrp {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .previewTitle {
+    background-image: linear-gradient(45deg, #a399ff, #fd99bc, #a399ff, #fa99ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200%;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: transparent;
+    text-align: center;
+    transition: transform var(--global-transition-duration) linear;
+    animation: textShine 3s linear infinite alternate;
+    margin: 0;
+  }
+  
+  .preview:not(.active) .previewTitle {
+    transform: translateY(100%);
+  }
+  
+  .previewButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    transition: opacity var(--global-transition-duration) linear;
+  }
+  
+  .preview:not(.active) .previewButtons {
+    opacity: 0;
+  }
+  
+  .previewButtons:not(:first-child) {
+    margin-top: 10px;
+  }
+  
+  .storeButton {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    position: relative;
+    background-color: rgba(250, 153, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 18px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    color: #fa99ff;
+    padding: 9px 16px 9px 44px;
+    cursor: pointer;
+    transition: background-color var(--global-transition-duration), color var(--global-transition-duration);
+    text-decoration: none;
+  }
+  
+  .storeButton svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    fill: #fa99ff;
+    transition: fill var(--global-transition-duration);
+  }
+  
+  .storeButton:hover {
+    background-color: #fa99ff;
+    color: #3e1940;
+  }
+  
+  .storeButton:hover svg {
+    fill: #3e1940;
+  }
+  
+  .previewNav {
+    overflow-x: auto;
+    padding: 0 24px;
+    transition: transform var(--global-transition-duration) linear;
+  }
+  
+  .preview:not(.active) .previewNav {
+    transform: translateY(calc(100% + 10px));
+  }
+  
+  .previewNav:not(:first-child) {
+    margin-top: 67px;
+  }
+  
+  .previewNav::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .previewNav ul {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    min-width: max-content;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .previewNav a {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid rgba(56, 56, 56, 0.3);
+    border-radius: 16px 16px 0 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--color-gray-300);
+    padding: 6px 12px 4px;
+    transition: color var(--global-transition-duration);
+    text-decoration: none;
+  }
+  
+  .navWithIcon {
+    position: relative;
+    padding-right: 34px !important;
+  }
+  
+  .navWithIcon svg {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    fill: none;
+    stroke: var(--color-gray-300);
+    transition: stroke var(--global-transition-duration);
+  }
+  
+  .previewNav a:hover {
+    color: #fafafa;
+  }
+  
+  .previewNav a:hover svg {
+    stroke: #fafafa;
+  }
+  
+  .previewObject {
+    display: flex;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: -86px;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: 1;
+    padding: 19px 0;
+  }
+  
+  .previewObjectContent {
+    width: 100%;
+    height: 31.133%;
+    position: relative;
+    margin-top: auto;
+  }
+  
+  .previewObjectIcon {
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .previewObjectIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform-origin: center;
+    transition: transform var(--global-transition-duration) linear;
+  }
+  
+  .previewObjectIcon:not(.iconActive) img {
+    transform: scale(0);
+  }
+  
+  .previewObjectBackground {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform: rotate(-90deg);
+  }
+  
+  .previewObjectBackground svg {
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Плавная анимация поворота гексагона */
+  .previewObject .previewObjectBackground svg {
+    transform: rotate(0deg);
+  }
+  
+  .activeState2 .previewObjectBackground svg {
+    transform: rotate(60deg);
+  }
+  
+  .activeState3 .previewObjectBackground svg {
+    transform: rotate(120deg);
+  }
+  
+  .activeState4 .previewObjectBackground svg {
+    transform: rotate(180deg);
+  }
+  
+  .activeState5 .previewObjectBackground svg {
+    transform: rotate(240deg);
+  }
+  
+  .activeState6 .previewObjectBackground svg {
+    transform: rotate(300deg);
+  }
+  
+  .previewObjectBackground svg path {
+    transition: fill-opacity 0.5s ease;
+  }
+  
+  .pathActive {
+    fill-opacity: 1 !important;
+  }
+  
+  .preview:not(.active) .previewObjectBackground svg path:nth-child(1) {
+    transform: translateX(-5px);
+  }
+  
+  .preview:not(.active) .previewObjectBackground svg path:nth-child(2) {
+    transform: translate(-3px, 3px);
+  }
+  
+  .preview:not(.active) .previewObjectBackground svg path:nth-child(3) {
+    transform: translate(3px, 3px);
+  }
+  
+  .preview:not(.active) .previewObjectBackground svg path:nth-child(4) {
+    transform: translateX(5px);
+  }
+  
+  .preview:not(.active) .previewObjectBackground svg path:nth-child(5) {
+    transform: translate(3px, -3px);
+  }
+  
+  .preview:not(.active) .previewObjectBackground svg path:nth-child(6) {
+    transform: translate(-3px, -3px);
+  }
+  
+  @keyframes cursorFlicker {
+    0%, 25% {
+      opacity: 1;
+    }
+    50%, 75% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes textShine {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0 50%;
+    }
+  }
+  
+  /* Responsive */
+  @media screen and (min-width: 576px) {
+    .container {
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    .container {
+      max-width: 100%;
+    }
+  
+    .preview {
+      border-radius: 40px;
+      background-image: url('/img/preview/lines-lg.svg');
+      padding: 111px 0 20px;
+    }
+  
+    .previewContent {
+      max-width: 620px;
+      padding: 0 0 0 20px;
+    }
+  
+    .preview:before {
+      background-image: url('/img/preview/glow-lg.svg');
+    }
+  
+    .previewTitle {
+      font-size: 36px;
+      line-height: 43px;
+    }
+  
+    .previewText {
+      height: 43px;
+      font-size: 36px;
+      line-height: 43px;
+    }
+  
+    .previewText:after {
+      height: 43px;
+    }
+  
+    .previewButtons:not(:first-child) {
+      margin-top: 20px;
+    }
+  
+    .storeButton {
+      border-radius: 21px;
+      font-size: 18px;
+      line-height: 22px;
+      padding: 10px 20px 10px 48px;
+    }
+  
+    .storeButton svg {
+      left: 20px;
+    }
+  
+    .previewNav {
+      padding: 0 42px;
+    }
+  
+    .previewNav:not(:first-child) {
+      margin-top: 171px;
+    }
+  
+    .preview:not(.active) .previewNav {
+      transform: translateY(calc(100% + 20px));
+    }
+  
+    .previewNav a {
+      font-size: 20px;
+      line-height: 24px;
+      padding: 8px 12px 6px;
+    }
+  
+    .navWithIcon {
+      padding-right: 38px !important;
+    }
+  
+    .navWithIcon svg {
+      width: 20px;
+      height: 20px;
+      right: 12px;
+    }
+  
+    .previewObject {
+      width: 280px;
+      height: 280px;
+      top: 40px;
+      right: 20px;
+      transform: unset;
+      padding: 0 21px;
+    }
+  
+    .previewObjectContent {
+      width: 31.093%;
+      height: 100%;
+    }
+  
+    .previewObjectIcon {
+      width: 38px;
+      height: 38px;
+    }
+  
+    .previewObjectBackground {
+      transform: unset;
+    }
+  
+    .preview:not(.active) .previewObjectBackground svg path:nth-child(1) {
+      transform: translateX(-10px);
+    }
+  
+    .preview:not(.active) .previewObjectBackground svg path:nth-child(2) {
+      transform: translate(-5px, 5px);
+    }
+  
+    .preview:not(.active) .previewObjectBackground svg path:nth-child(3) {
+      transform: translate(5px, 5px);
+    }
+  
+    .preview:not(.active) .previewObjectBackground svg path:nth-child(4) {
+      transform: translateX(10px);
+    }
+  
+    .preview:not(.active) .previewObjectBackground svg path:nth-child(5) {
+      transform: translate(5px, -5px);
+    }
+  
+    .preview:not(.active) .previewObjectBackground svg path:nth-child(6) {
+      transform: translate(-5px, -5px);
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .container {
+      max-width: 1330px;
+    }
+  
+    .preview {
+      border-radius: 60px;
+      padding-top: 211px;
+    }
+  
+    .previewContent {
+      max-width: 840px;
+      padding-left: 40px;
+    }
+  
+    .previewTitle {
+      font-size: 58px;
+      line-height: 70px;
+    }
+  
+    .previewText {
+      height: 58px;
+      font-size: 48px;
+      line-height: 58px;
+    }
+  
+    .previewNav {
+      padding: 0 64px;
+    }
+  
+    .previewNav:not(:first-child) {
+      margin-top: 179px;
+    }
+  
+    .previewText:after {
+      height: 58px;
+    }
+  
+    .previewObject {
+      width: 400px;
+      height: 400px;
+      right: 40px;
+      padding: 0 30px;
+    }
+  
+    .previewObjectContent {
+      width: 31.177%;
+    }
+  
+    .previewObjectIcon {
+      width: 52px;
+      height: 52px;
+    }
+  }
