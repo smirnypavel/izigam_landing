@@ -4,10 +4,10 @@
     transition: opacity var(--global-transition-duration);
   }
   
-  :global(.loaded) .section {
+  /* :global(.loaded) .section {
     opacity: 1;
   }
-  
+   */
   .topSpacing {
     padding-top: 100px;
   }
