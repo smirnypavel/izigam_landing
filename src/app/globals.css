@@ -38,27 +38,11 @@ html, body {
   padding: 0;
   scroll-behavior: smooth;
 }
-/* Smooth Scrolling */
-:global(html) {
-  scroll-behavior: smooth;
-}
 
-/* Section Anchors */
-:global(section[id]) {
-  scroll-margin-top: 100px;
-}
 
-/* Loading States */
-:global(body:not(.loaded)) .main section {
-  opacity: 0;
-  transform: translateY(20px);
-}
 
-:global(body.loaded) .main section {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
+
+
 body {
   min-height: 100vh;
   background-color: var(--body-background-color);

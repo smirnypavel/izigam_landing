@@ -1,15 +1,14 @@
 'use client'
-
 import { useState, useEffect } from 'react'
 import styles from './Modal.module.css'
 
 const Modal = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [timeLeft, setTimeLeft] = useState({
-    days: 10,
-    hours: 23,
-    minutes: 59,
-    seconds: 59
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
   })
 
   useEffect(() => {
@@ -38,28 +37,29 @@ const Modal = () => {
   }, [])
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        let { days, hours, minutes, seconds } = prev
-        
-        if (seconds > 0) {
-          seconds--
-        } else if (minutes > 0) {
-          minutes--
-          seconds = 59
-        } else if (hours > 0) {
-          hours--
-          minutes = 59
-          seconds = 59
-        } else if (days > 0) {
-          days--
-          hours = 23
-          minutes = 59
-          seconds = 59
-        }
-        
+    const calculateTimeLeft = () => {
+      // Target date: October 1, 2025 00:00:00
+      const targetDate = new Date('2025-10-01T00:00:00').getTime()
+      const now = new Date().getTime()
+      const difference = targetDate - now
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24))
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000)
+
         return { days, hours, minutes, seconds }
-      })
+      } else {
+        return { days: 0, hours: 0, minutes: 0, seconds: 0 }
+      }
+    }
+
+    // Set initial time
+    setTimeLeft(calculateTimeLeft())
+
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft())
     }, 1000)
 
     return () => clearInterval(timer)
@@ -70,7 +70,7 @@ const Modal = () => {
       <div className={styles.body}>
         <div className={styles.container}>
           <div className={styles.content}>
-            <h3 className={`${styles.title} fw-500 text-center`}>Step by step</h3>
+            <h3 className={`${styles.title} fw-500 text-center`}>Countdown to Q4 2025</h3>
             <div className={styles.timer}>
               <div className={styles.timerSection}>
                 <span>{timeLeft.days.toString().padStart(2, '0')}</span>
