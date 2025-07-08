@@ -228,7 +228,7 @@
     overflow: hidden;
   }
   
-  /* .ticker :global(.swiper-wrapper) {
+  .ticker :global(.swiper-wrapper) {
     transition-timing-function: linear !important;
     animation-fill-mode: forwards;
   }
@@ -236,7 +236,7 @@
   .ticker :global(.swiper-slide) {
     transition: none !important;
   }
-   */
+  
   .swiperSlide {
     width: fit-content !important;
     flex-shrink: 0;

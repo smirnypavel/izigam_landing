@@ -4,9 +4,9 @@
   transition: opacity var(--global-transition-duration);
 }
 
-/* :global(.loaded) .section {
+:global(.loaded) .section {
   opacity: 1;
-} */
+}
 
 .bottomSpacing {
   padding-bottom: 6.25rem; /* 100px */
