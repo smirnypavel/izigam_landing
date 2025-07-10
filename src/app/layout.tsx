@@ -1,4 +1,6 @@
+// app/layout.tsx (или src/app/layout.tsx)
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import { NeueMontreal } from './fonts'
 
@@ -26,7 +28,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={NeueMontreal.variable}>
-      <body >
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RX2NN0PRHN"
+          strategy="afterInteractive"
+        />
+
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RX2NN0PRHN');
+          `}
+        </Script>
+      </head>
+      <body>
         {children}
       </body>
     </html>

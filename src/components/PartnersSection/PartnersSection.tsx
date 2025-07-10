@@ -145,7 +145,7 @@ const PartnersSection = () => {
             ))}
             
             <div className={styles.partnersTitle}>
-              <h3>Partners</h3>
+              <h3>Company name</h3>
             </div>
             
             {bottomRowPartners.slice(2).map((partner, index) => (

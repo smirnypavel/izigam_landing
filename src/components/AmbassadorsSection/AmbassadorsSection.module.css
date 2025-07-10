@@ -132,6 +132,36 @@
   transition: max-height 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
+.ambassadorsSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(163, 153, 255, 0.03),
+    transparent,
+    rgba(250, 153, 255, 0.03),
+    transparent
+  );
+  background-size: 400% 400%;
+  animation: sectionGlow 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes sectionGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 .ambassadorsSection.collapsed {
   max-height: 25rem;
   overflow: hidden;
@@ -165,6 +195,7 @@
   scrollbar-width: none;
   cursor: grab;
   user-select: none;
+  z-index: 2;
 }
 
 .ambassadorsExpanded::-webkit-scrollbar {
@@ -184,9 +215,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem; /* Увеличен отступ между рядами */
+  gap: 1.25rem;
   width: 100%;
-  min-width: 87.5rem; /* Увеличена ширина для больших отступов */
+  min-width: 87.5rem;
   width: max-content;
   margin: 0 auto;
   padding: 3.125rem;
@@ -194,47 +225,73 @@
 
 .honeycombRow {
   display: flex;
-  gap: 1.5625rem; /* Увеличен зазор между гексагонами с 8px до 25px */
-  margin-bottom: -3.125rem; /* Перекриття рядків для щільної упаковки */
+  gap: 1.5625rem;
+  margin-bottom: -3.125rem;
 }
 
 .honeycombRow:nth-child(even) {
-  margin-left: -14.25rem; /* Offset для парних рядків (обновлен для новых размеров) */
+  margin-left: -14.25rem;
 }
 
-/* AMBASSADOR CARD WITH LEVITATION ANIMATION */
+/* AMBASSADOR CARD WITH REDUCED LEVITATION AND GLOWING EFFECTS */
 .ambassadorCard {
   position: relative;
-  width: 15rem; /* 240px */
-  height: 15rem; /* 240px */
+  width: 15rem;
+  height: 15rem;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 2;
-  animation: levitate 6s ease-in-out infinite;
   filter: drop-shadow(0 0.625rem 1.25rem rgba(163, 153, 255, 0.3));
+  /* Убираем анимацию левитации для мобильных устройств */
 }
 
-.ambassadorCard:nth-child(odd) {
-  animation-delay: -2s;
-}
+/* Левитация только для больших экранов */
+@media (min-width: 769px) {
+  .ambassadorCard {
+    animation: levitate 8s ease-in-out infinite;
+  }
+  
+  .ambassadorCard:nth-child(odd) {
+    animation-delay: -3s;
+  }
 
-.ambassadorCard:nth-child(even) {
-  animation-delay: -4s;
+  .ambassadorCard:nth-child(even) {
+    animation-delay: -6s;
+  }
+  
+  .ambassadorCard:nth-child(3n) {
+    animation-delay: -1s;
+  }
 }
 
 @keyframes levitate {
   0%, 100% {
     transform: translateY(0px);
+    filter: drop-shadow(0 0.625rem 1.25rem rgba(163, 153, 255, 0.3));
   }
   50% {
-    transform: translateY(-0.9375rem); /* -15px */
+    transform: translateY(-0.375rem);
+    filter: drop-shadow(0 0.9375rem 1.875rem rgba(163, 153, 255, 0.5));
   }
 }
 
 .ambassadorCard:hover {
-  transform: scale(1.15) translateY(-0.625rem); /* scale(1.15) translateY(-10px) */
+  transform: scale(1.1) translateY(-0.3125rem);
   z-index: 10;
   animation-play-state: paused;
+}
+
+/* Улучшенная область клика для мобильных */
+@media (max-width: 768px) {
+  .ambassadorCard:hover {
+    transform: scale(1.05) translateY(-0.1875rem); /* Уменьшено для мобильных */
+  }
+  
+  /* Улучшаем касания для мобильных */
+  .ambassadorCard {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 .hexagonBorder {
@@ -246,6 +303,36 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.hexagonBorder::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #a399ff, #ff3cac, #fa99ff, #a399ff);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ambassadorCard:hover .hexagonBorder::before {
+  opacity: 1;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .hexagonContent {
@@ -268,8 +355,42 @@
   z-index: 1;
 }
 
+.hexagonContent::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 200%;
+  animation: shimmerSweep 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.ambassadorCard:hover .hexagonContent::after {
+  opacity: 1;
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% -200%;
+  }
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
 .hexagonContent img {
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: brightness(1) contrast(1.1) saturate(1.2);
 }
 
 .ambassadorInfo {
@@ -285,6 +406,7 @@
   text-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.8);
   transition: opacity 0.3s ease;
   opacity: 0;
+  pointer-events: none; /* Предотвращаем блокировку кликов */
 }
 
 .ambassadorCard:hover .ambassadorInfo {
@@ -292,8 +414,8 @@
 }
 
 .ambassadorCard:hover .hexagonContent img {
-  transform: scale(1.1);
-  filter: brightness(0.7);
+  transform: scale(1.1) rotate(2deg);
+  filter: brightness(0.7) contrast(1.3) saturate(1.5);
 }
 
 .ambassadorUsername {
@@ -306,27 +428,92 @@
   font-size: 0.875rem;
 }
 
+/* Улучшенная кнопка ссылки для мобильных с пульсацией */
 .linkIcon {
   position: absolute;
   right: 42%;
   bottom: 0.625rem;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 100%;
-  background-color: rgba(30, 30, 30, 0.7);
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.9), rgba(60, 60, 60, 0.9));
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 15;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   color: white;
   border: none;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.linkIcon::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #a399ff, #ff3cac, #fa99ff);
+  border-radius: 100%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.linkIcon:hover::before {
+  opacity: 1;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
 }
 
 .linkIcon:hover {
-  background-color: rgba(250, 153, 255, 0.8);
-  transform: scale(1.1);
+  background: linear-gradient(135deg, rgba(250, 153, 255, 0.9), rgba(163, 153, 255, 0.9));
+  transform: scale(1.15) translateY(-2px);
+  box-shadow: 0 8px 30px rgba(250, 153, 255, 0.4);
+}
+
+/* Активное состояние для мобильных */
+.linkIcon:active {
+  transform: scale(0.95);
+  background: linear-gradient(135deg, rgba(250, 153, 255, 1), rgba(163, 153, 255, 1));
+}
+
+@media (max-width: 768px) {
+  .linkIcon {
+    width: 3rem; /* Еще больше для мобильных */
+    height: 3rem;
+    min-width: 3rem;
+    min-height: 3rem;
+    right: 35%; /* Центрируем лучше */
+  }
+}
+
+@media (max-width: 480px) {
+  .linkIcon {
+    width: 2.15rem;
+    height: 2.15rem;
+    min-width: 2.15rem;
+    min-height: 2.15rem;
+    right: 34%;
+  }
 }
 
 .ambassadorsToggleBtn {
@@ -337,7 +524,7 @@
   align-items: center;
   width: fit-content;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.25rem; /* Увеличено для лучшего касания */
   border-radius: 1.25rem;
   background-color: rgba(0, 0, 0, 0.6);
   border: 0.0625rem solid rgba(255, 255, 255, 0.3);
@@ -346,11 +533,18 @@
   cursor: pointer;
   z-index: 20;
   transition: all 0.3s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 2.5rem; /* Минимальная высота для касаний */
 }
 
 .ambassadorsToggleBtn:hover {
   background-color: rgba(250, 153, 255, 0.3);
   border-color: rgba(250, 153, 255, 0.6);
+}
+
+.ambassadorsToggleBtn:active {
+  transform: scale(0.98);
 }
 
 .ambassadorsToggleBtn svg {
@@ -361,7 +555,7 @@
   stroke: currentColor;
 }
 
-/* MODAL STYLES */
+/* MODAL STYLES - Улучшения для мобильных */
 .modalBackdrop {
   position: fixed;
   inset: 0;
@@ -371,17 +565,19 @@
   justify-content: center;
   z-index: 50;
   backdrop-filter: blur(0.25rem);
+  padding: 1rem; /* Добавляем отступы */
 }
 
 .modalContent {
   background-color: #1f2937;
   border-radius: 1rem;
   padding: 1.5rem;
-  margin: 1rem;
   max-width: 24rem;
   width: 100%;
   border: 0.0625rem solid rgba(139, 92, 246, 0.3);
   box-shadow: 0 1.25rem 3.125rem rgba(0, 0, 0, 0.5);
+  max-height: 90vh; /* Ограничиваем высоту */
+  overflow-y: auto; /* Добавляем прокрутку при необходимости */
 }
 
 .modalHeader {
@@ -404,13 +600,24 @@
   border: none;
   cursor: pointer;
   transition: color 0.3s ease;
-  padding: 0.25rem;
+  padding: 0.5rem; /* Увеличено для лучшего касания */
   border-radius: 0.25rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .modalCloseBtn:hover {
   color: white;
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modalCloseBtn:active {
+  transform: scale(0.95);
 }
 
 .modalUserInfo {
@@ -452,19 +659,26 @@
   justify-content: center;
   gap: 0.75rem;
   width: 100%;
-  padding: 0.75rem;
+  padding: 1rem; /* Увеличено для лучшего касания */
   text-decoration: none;
   color: white;
   border-radius: 0.5rem;
   font-weight: 500;
   transition: all 0.2s ease;
   transform: scale(1);
+  min-height: 3rem; /* Минимальная высота для касаний */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .modalBtn:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   text-decoration: none;
   color: white;
+}
+
+.modalBtn:active {
+  transform: scale(0.98);
 }
 
 .instagramBtn {
@@ -491,42 +705,42 @@
 /* Responsive adjustments */
 @media (max-width: 1200px) {
   .ambassadorCard {
-    width: 12.5rem; /* 200px */
-    height: 12.5rem; /* 200px */
+    width: 12.5rem;
+    height: 12.5rem;
   }
   
   .hexagonGrid {
-    min-width: 62.5rem; /* 1000px */
+    min-width: 62.5rem;
   }
   
   .honeycombRow {
-    gap: 0.375rem; /* 6px */
+    gap: 0.375rem;
     margin-bottom: -3.125rem;
   }
   
   .honeycombRow:nth-child(even) {
-    margin-left: -12.4375rem; /* (200px + 6px) / 2 */
+    margin-left: -12.4375rem;
   }
 }
 
 @media (max-width: 768px) {
   .ambassadorCard {
-    width: 10rem; /* 160px */
-    height: 10rem; /* 160px */
+    width: 10rem;
+    height: 10rem;
   }
   
   .hexagonGrid {
-    min-width: 50rem; /* 800px */
-    gap: 0.9375rem; /* 15px */
+    min-width: 50rem;
+    gap: 0.9375rem;
   }
   
   .honeycombRow {
-    gap: 0.25rem; /* 4px */
-    margin-bottom: -2.5rem; /* -40px */
+    gap: 0.25rem;
+    margin-bottom: -2.5rem;
   }
   
   .honeycombRow:nth-child(even) {
-    margin-left: -10.125rem; /* (160px + 4px) / 2 */
+    margin-left: -10.125rem;
   }
   
   .ambassadorUsername {
@@ -535,11 +749,6 @@
   
   .ambassadorFollowers {
     font-size: 0.75rem;
-  }
-  
-  .linkIcon {
-    width: 1.5rem;
-    height: 1.5rem;
   }
 
   .titleWrapper {
@@ -557,23 +766,23 @@
 
 @media (max-width: 480px) {
   .ambassadorCard {
-    width: 7.5rem; /* 120px */
-    height: 7.5rem; /* 120px */
+    width: 7.5rem;
+    height: 7.5rem;
   }
   
   .hexagonGrid {
-    min-width: 37.5rem; /* 600px */
-    gap: 0.625rem; /* 10px */
-    padding: 1.875rem; /* 30px */
+    min-width: 37.5rem;
+    gap: 0.625rem;
+    padding: 1.875rem;
   }
   
   .honeycombRow {
-    gap: 0.125rem; /* 2px */
-    margin-bottom: -1.875rem; /* -30px */
+    gap: 0.125rem;
+    margin-bottom: -1.875rem;
   }
   
   .honeycombRow:nth-child(even) {
-    margin-left: -3.8125rem; /* (120px + 2px) / 2 */
+    margin-left: -7.8125rem;
   }
   
   .ambassadorUsername {
@@ -587,11 +796,6 @@
   .ambassadorsExpanded {
     padding: 1.25rem;
   }
-  
-  .linkIcon {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
 
   .modalContent {
     margin: 0.5rem;
@@ -603,7 +807,7 @@
   }
 
   .modalBtn {
-    padding: 0.625rem;
+    padding: 0.875rem;
     font-size: 0.875rem;
   }
 
