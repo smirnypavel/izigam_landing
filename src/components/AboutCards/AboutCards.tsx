@@ -107,14 +107,14 @@ const AboutCards = () => {
                 />
                 <Image
                   className={styles.aboutCardImgTablet}
-                  src="/img/about-cards/04-md.webp"
+                  src="/img/about-cards/04.webp"
                   alt="About card tablet image 4"
                   width={350}
                   height={340}
                 />
                 <Image
                   className={styles.aboutCardImgDesktop}
-                  src="/img/about-cards/04-lg.webp"
+                  src="/img/about-cards/04-lg.png"
                   alt="About card desktop image 4"
                   width={350}
                   height={340}
