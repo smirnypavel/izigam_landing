@@ -40,13 +40,14 @@ const TRANSITION_DURATION: number = 0.8
 const AMBASSADORS_DATA: Ambassador[] = [
   {
     id: 1,
-    name: "pppelvetskiyyy",
-    username: "pppelvetskiyyy",
-    followers: "137к subs",
-    image: "/img/ambassadors/1.jpg",
-    instagram: "https://www.instagram.com/pppelvetskiyyy/?utm_source=ig_web_button_share_sheet",
-    tiktok: "https://www.tiktok.com/@pppelvetskiyyy?_t=ZM-8vxzmh8MrLi&_r=1",
+    name: "volkov_kx",
+    username: "volkov_kx",
+    followers: "14.7K subs",
+    image: "/img/ambassadors/5.jpg",
+    instagram: "https://www.instagram.com/volkov_kx?igsh=eTdod2dhNmhrdDc4",
+    tiktok: "https://www.tiktok.com/@volkov.kx?_t=ZS-8xpxWEPjKS7&_r=1",
   },
+ 
   {
     id: 2,
     name: "this_is_barta",
@@ -76,12 +77,12 @@ const AMBASSADORS_DATA: Ambassador[] = [
   },
   {
     id: 5,
-    name: "volkov_kx",
-    username: "volkov_kx",
-    followers: "14.7K subs",
-    image: "/img/ambassadors/5.jpg",
-    instagram: "https://www.instagram.com/volkov_kx?igsh=eTdod2dhNmhrdDc4",
-    tiktok: "https://www.tiktok.com/@volkov.kx?_t=ZS-8xpxWEPjKS7&_r=1",
+    name: "pppelvetskiyyy",
+    username: "pppelvetskiyyy",
+    followers: "137к subs",
+    image: "/img/ambassadors/1.jpg",
+    instagram: "https://www.instagram.com/pppelvetskiyyy/?utm_source=ig_web_button_share_sheet",
+    tiktok: "https://www.tiktok.com/@pppelvetskiyyy?_t=ZM-8vxzmh8MrLi&_r=1",
   },
   {
     id: 6,
@@ -103,15 +104,6 @@ const AMBASSADORS_DATA: Ambassador[] = [
   },
   {
     id: 8,
-    name: "torlviv",
-    username: "torlviv",
-    followers: "970K subs",
-    image: "/img/ambassadors/8.jpg",
-    instagram: "https://www.instagram.com/gavrilyuk.danilo?igsh=MWY0ZzM0a2Jla2xiNw%3D%3D&utm_source=qr",
-    tiktok: "https://www.tiktok.com/@danilo.gavrilyuk?_t=ZM-8xrNNCZyVhG&_r=1",
-  },
-  {
-    id: 9,
     name: "maria",
     username: "maria.pankiv",
     followers: "970K subs",
@@ -119,6 +111,16 @@ const AMBASSADORS_DATA: Ambassador[] = [
     instagram: "https://www.instagram.com/maria.pankiv?igsh=MXd5NmZwc2dnY2tjdg==",
     tiktok: "https://www.tiktok.com/@mariia_pankiv?_t=ZM-8xrOghJYr82&_r=1",
   },
+  {
+    id: 9,
+    name: "torlviv",
+    username: "torlviv",
+    followers: "970K subs",
+    image: "/img/ambassadors/8.jpg",
+    instagram: "https://www.instagram.com/gavrilyuk.danilo?igsh=MWY0ZzM0a2Jla2xiNw%3D%3D&utm_source=qr",
+    tiktok: "https://www.tiktok.com/@danilo.gavrilyuk?_t=ZM-8xrNNCZyVhG&_r=1",
+  },
+  
 ]
 
 // Модальное окно для выбора социальной сети
