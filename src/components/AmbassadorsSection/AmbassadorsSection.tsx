@@ -79,7 +79,7 @@ const AMBASSADORS_DATA: Ambassador[] = [
     id: 5,
     name: "pppelvetskiyyy",
     username: "pppelvetskiyyy",
-    followers: "137к subs",
+    followers: "1.1M subs",
     image: "/img/ambassadors/1.jpg",
     instagram: "https://www.instagram.com/pppelvetskiyyy/?utm_source=ig_web_button_share_sheet",
     tiktok: "https://www.tiktok.com/@pppelvetskiyyy?_t=ZM-8vxzmh8MrLi&_r=1",

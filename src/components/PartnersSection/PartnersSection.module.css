@@ -103,6 +103,9 @@
   position: relative;
   width: 70%;
   height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.5s ease, filter 0.5s ease; /* Увеличено время перехода */
   z-index: 1;
 }
@@ -233,7 +236,7 @@
 }
 
 .partnerPlaceholder {
-  padding: 0.9375rem; /* 15px */
+  padding: 0.4375rem; /* 15px */
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 500;
@@ -286,7 +289,7 @@
 
  /* Добавляем заголовок перед рядами на мобильных */
 .partnersWrapper::before {
-  content: 'Company name';
+  content: 'Partners';
   display: block;
   text-align: center;
   font-weight: 700;

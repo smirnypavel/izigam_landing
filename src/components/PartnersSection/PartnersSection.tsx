@@ -73,7 +73,9 @@ const PartnersSection = () => {
                   style={{ backgroundColor: partner.backgroundColor }}
                 >
                   <div className={styles.imageWrapper}>
-                    {/* Пустой блок */}
+                    <div className={styles.partnerPlaceholder}>
+                      Company name
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -114,7 +116,9 @@ const PartnersSection = () => {
                   style={{ backgroundColor: partner.backgroundColor }}
                 >
                   <div className={styles.imageWrapper}>
-                    {/* Пустой блок */}
+                    <div className={styles.partnerPlaceholder}>
+                      Company name
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -145,7 +149,7 @@ const PartnersSection = () => {
             ))}
             
             <div className={styles.partnersTitle}>
-              <h3>Company name</h3>
+              <h3>Partners</h3>
             </div>
             
             {bottomRowPartners.slice(2).map((partner, index) => (
@@ -156,7 +160,9 @@ const PartnersSection = () => {
                   style={{ backgroundColor: partner.backgroundColor }}
                 >
                   <div className={styles.imageWrapper}>
-                    {/* Пустой блок */}
+                    <div className={styles.partnerPlaceholder}>
+                      Company name
+                    </div>
                   </div>
                 </div>
               ) : (
