@@ -17,7 +17,7 @@ const MediaContent = ({ variant = 'default' }: MediaContentProps) => {
   } : {
     title: 'The hexamer of your ideas',
     text: 'IZIGRAM is changing the idea of social networks! Your profile is a dynamic space where photos and videos are stacked in a unique hexagonal grid. Share content, find like-minded people, earn money and manage your digital world the way you want.',
-    posterSrc: '/img/media-content/01.webp',
+    posterSrc: '/img/media-content/01.png',
     videoSrc: '/video/01.mp4',
     note: 'Your content',
     hasHearts: false

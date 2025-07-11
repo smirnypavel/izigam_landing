@@ -132,7 +132,7 @@ const PricesSection: React.FC = () => {
           <div className={styles.pricesSectionCol} data-aos="fade-right">
             <CustomPlayer
               videoSrc="/video/01.mp4"
-              posterSrc="/img/prices-section/01.webp"
+              posterSrc="/img/prices-section/01.png"
               posterAlt="Crypto wallet preview"
             />
           </div>

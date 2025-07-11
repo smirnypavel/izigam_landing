@@ -37,15 +37,7 @@ const CustomPlayer = ({
     <div className={`${styles.customPlayer} ${isPlaying ? styles.active : ''} ${className}`}>
       <div className={styles.body}>
         <div className={styles.content}>
-          {videoSrc && (
-            <video 
-              ref={videoRef}
-              src={videoSrc}
-              muted
-              loop
-              playsInline
-            />
-          )}
+         
           <Image
             src={posterSrc}
             alt={posterAlt}

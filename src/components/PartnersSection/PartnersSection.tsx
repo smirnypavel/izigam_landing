@@ -14,7 +14,7 @@ const topRowPartners = [
   {
     name: "Icorna",
     logo: "/img/partners/icorn.svg",
-    url: "https://icorna.com",
+    url: "https://icorna.org",
     backgroundColor: "#ff8c001a", 
     isEmpty: false,
   },
@@ -59,6 +59,12 @@ const bottomRowPartners = [
 ]
 
 const PartnersSection = () => {
+  const handlePartnerClick = (url:any) => {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <section className={`${styles.section} ${styles.bottomSpacing}`} data-aos="fade-up">
       <div className={styles.container}>
@@ -79,13 +85,19 @@ const PartnersSection = () => {
                   </div>
                 </div>
               ) : (
-                <a
+                <div
                   key={partner.name || `partner-${index}`}
-                  href={partner.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.partnerCard}
+                  onClick={() => handlePartnerClick(partner.url)}
+                  className={`${styles.partnerCard} ${styles.clickable}`}
                   style={{ backgroundColor: partner.backgroundColor }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handlePartnerClick(partner.url);
+                    }
+                  }}
                 >
                   <div className={styles.imageWrapper}>
                     {partner.logo && (
@@ -101,7 +113,7 @@ const PartnersSection = () => {
                       />
                     )}
                   </div>
-                </a>
+                </div>
               )
             ))}
           </div>
@@ -122,13 +134,19 @@ const PartnersSection = () => {
                   </div>
                 </div>
               ) : (
-                <a
+                <div
                   key={partner.name || `partner-bottom-${index}`}
-                  href={partner.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.partnerCard}
+                  onClick={() => handlePartnerClick(partner.url)}
+                  className={`${styles.partnerCard} ${styles.clickable}`}
                   style={{ backgroundColor: partner.backgroundColor }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handlePartnerClick(partner.url);
+                    }
+                  }}
                 >
                   <div className={styles.imageWrapper}>
                     {partner.logo && (
@@ -144,12 +162,15 @@ const PartnersSection = () => {
                       />
                     )}
                   </div>
-                </a>
+                </div>
               )
             ))}
             
             <div className={styles.partnersTitle}>
-              <h3>Partners</h3>
+              <h3 className={styles.gradientText}>
+                <span className={styles.textContent}>Partners</span>
+                <span className={styles.textGlow}>Partners</span>
+              </h3>
             </div>
             
             {bottomRowPartners.slice(2).map((partner, index) => (
@@ -166,13 +187,19 @@ const PartnersSection = () => {
                   </div>
                 </div>
               ) : (
-                <a
+                <div
                   key={partner.name || `partner-bottom-${index + 2}`}
-                  href={partner.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.partnerCard}
+                  onClick={() => handlePartnerClick(partner.url)}
+                  className={`${styles.partnerCard} ${styles.clickable}`}
                   style={{ backgroundColor: partner.backgroundColor }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handlePartnerClick(partner.url);
+                    }
+                  }}
                 >
                   <div className={styles.imageWrapper}>
                     {partner.logo && (
@@ -188,7 +215,7 @@ const PartnersSection = () => {
                       />
                     )}
                   </div>
-                </a>
+                </div>
               )
             ))}
           </div>
