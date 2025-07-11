@@ -25,6 +25,7 @@ interface SocialModalProps {
 interface AmbassadorCardProps {
   ambassador: Ambassador
   onSocialClick: (ambassador: Ambassador) => void
+  isMobile: boolean
 }
 
 interface DragState {
@@ -35,6 +36,7 @@ interface DragState {
 // Константы для лучшей читаемости
 const SCROLL_MULTIPLIER: number = 2
 const TRANSITION_DURATION: number = 0.8
+const MOBILE_BREAKPOINT: number = 768
 
 // Данные амбассадоров
 const AMBASSADORS_DATA: Ambassador[] = [
@@ -123,6 +125,24 @@ const AMBASSADORS_DATA: Ambassador[] = [
   
 ]
 
+// Хук для определения мобильного устройства
+const useIsMobile = (): boolean => {
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+
+  useState(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  })
+
+  return isMobile
+}
+
 // Модальное окно для выбора социальной сети
 const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose, ambassador }) => {
   if (!isOpen || !ambassador) return null
@@ -131,6 +151,10 @@ const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose, ambassador }
     if (e.target === e.currentTarget) {
       onClose()
     }
+  }
+
+  const handleSocialClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -162,29 +186,25 @@ const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose, ambassador }
         </div>
         
         <div className={styles.modalButtons}>
-          <a
-            href={ambassador.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => handleSocialClick(ambassador.instagram)}
             className={`${styles.modalBtn} ${styles.instagramBtn}`}
           >
             <svg className={styles.modalBtnIcon} fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
             </svg>
             Instagram
-          </a>
+          </button>
           
-          <a
-            href={ambassador.tiktok}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => handleSocialClick(ambassador.tiktok)}
             className={`${styles.modalBtn} ${styles.tiktokBtn}`}
           >
             <svg className={styles.modalBtnIcon} fill="currentColor" viewBox="0 0 24 24">
               <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-1.032-.17 6.395 6.395 0 0 0-5.398 10.692 6.397 6.397 0 0 0 10.923-4.618V8.054a8.23 8.23 0 0 0 4.741 1.492v-3.06a4.795 4.795 0 0 1-.001.2z"/>
             </svg>
             TikTok
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -192,14 +212,28 @@ const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose, ambassador }
 }
 
 // Компонент для отдельной карточки амбассадора
-const AmbassadorCard: React.FC<AmbassadorCardProps> = ({ ambassador, onSocialClick }) => {
+const AmbassadorCard: React.FC<AmbassadorCardProps> = ({ ambassador, onSocialClick, isMobile }) => {
+  const handleCardClick = useCallback(() => {
+    if (isMobile) {
+      onSocialClick(ambassador)
+    }
+  }, [ambassador, onSocialClick, isMobile])
+
   const handleLinkClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
-    onSocialClick(ambassador)
-  }, [ambassador, onSocialClick])
+    if (!isMobile) {
+      onSocialClick(ambassador)
+    }
+  }, [ambassador, onSocialClick, isMobile])
 
   return (
-    <div className={styles.ambassadorCard}>
+    <div 
+      className={styles.ambassadorCard}
+      onClick={handleCardClick}
+      role={isMobile ? "button" : undefined}
+      tabIndex={isMobile ? 0 : undefined}
+      aria-label={isMobile ? `View ${ambassador.username}'s social profiles` : undefined}
+    >
       <div className={styles.hexagonBorder}>
         <div className={styles.hexagonContent}>
           <Image
@@ -218,13 +252,15 @@ const AmbassadorCard: React.FC<AmbassadorCardProps> = ({ ambassador, onSocialCli
         <div className={styles.ambassadorFollowers}>{ambassador.followers}</div>
       </div>
       
-      <button
-        onClick={handleLinkClick}
-        className={styles.linkIcon}
-        aria-label={`Visit ${ambassador.username}'s social profiles`}
-      >
-        <ExternalLink size={16} />
-      </button>
+      {!isMobile && (
+        <button
+          onClick={handleLinkClick}
+          className={styles.linkIcon}
+          aria-label={`Visit ${ambassador.username}'s social profiles`}
+        >
+          <ExternalLink size={16} strokeWidth={2.5} />
+        </button>
+      )}
     </div>
   )
 }
@@ -235,6 +271,7 @@ const AmbassadorsSection: React.FC = () => {
   const [isDragging, setIsDragging] = useState<boolean>(false)
   const [dragStart, setDragStart] = useState<DragState>({ x: 0, scrollLeft: 0 })
   const [modalAmbassador, setModalAmbassador] = useState<Ambassador | null>(null)
+  const isMobile = useIsMobile()
 
   // Мемоизация для подсчета общей аудитории
   const totalAudience = useMemo((): number => {
@@ -264,8 +301,8 @@ const AmbassadorsSection: React.FC = () => {
   }, [])
 
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>): void => {
-    // Не перетягиваем если клик по кнопке
-    if ((e.target as HTMLElement).closest('button')) return
+    // Не перетягиваем если клик по кнопке или на мобильном
+    if ((e.target as HTMLElement).closest('button') || isMobile) return
     
     setIsDragging(true)
     const container = e.currentTarget
@@ -273,17 +310,17 @@ const AmbassadorsSection: React.FC = () => {
       x: e.pageX - container.offsetLeft,
       scrollLeft: container.scrollLeft
     })
-  }, [])
+  }, [isMobile])
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>): void => {
-    if (!isDragging) return
+    if (!isDragging || isMobile) return
     e.preventDefault()
     
     const container = e.currentTarget
     const x = e.pageX - container.offsetLeft
     const walk = (x - dragStart.x) * SCROLL_MULTIPLIER
     container.scrollLeft = dragStart.scrollLeft - walk
-  }, [isDragging, dragStart])
+  }, [isDragging, dragStart, isMobile])
 
   const handleMouseUp = useCallback((): void => {
     setIsDragging(false)
@@ -313,10 +350,11 @@ const AmbassadorsSection: React.FC = () => {
 
   // Добавляем обработчики для колесика мыши
   const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>): void => {
+    if (isMobile) return
     e.preventDefault()
     const container = e.currentTarget
     container.scrollLeft += e.deltaY
-  }, [])
+  }, [isMobile])
 
   // Группируем амбассадоров по рядам для honeycomb структуры
   const ambassadorRows = useMemo((): Ambassador[][] => {
@@ -360,6 +398,7 @@ const AmbassadorsSection: React.FC = () => {
                       key={ambassador.id} 
                       ambassador={ambassador}
                       onSocialClick={handleSocialClick}
+                      isMobile={isMobile}
                     />
                   ))}
                 </div>
