@@ -1,10 +1,9 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
-import CustomPlayer from '../CustomPlayer/CustomPlayer'
 import styles from './PricesSection.module.css'
 
 // Import Swiper styles
@@ -130,11 +129,15 @@ const PricesSection: React.FC = () => {
             </p>
           </div>
           <div className={styles.pricesSectionCol} data-aos="fade-right">
-            <CustomPlayer
-              videoSrc="/video/01.mp4"
-              posterSrc="/img/prices-section/01.png"
-              posterAlt="Crypto wallet preview"
-            />
+            <div className={styles.imageContainer}>
+              <Image
+                src="/img/prices-section/01.png"
+                alt="Crypto wallet preview"
+                width={600}
+                height={800}
+                className={styles.mainImage}
+              />
+            </div>
           </div>
         </div>
       </div>
