@@ -80,7 +80,18 @@ const PartnersSection = () => {
                 >
                   <div className={styles.imageWrapper}>
                     <div className={styles.partnerPlaceholder}>
-                      Company name
+                      <Image
+                        src="/img/logo.svg"
+                        alt="Company logo"
+                        width={90}
+                        height={55}
+                        style={{ 
+                          objectFit: 'contain',
+                          opacity: 0.3,
+                          filter: 'brightness(0.8) saturate(0.6)'
+                        }}
+                        priority={false}
+                      />
                     </div>
                   </div>
                 </div>
@@ -129,7 +140,18 @@ const PartnersSection = () => {
                 >
                   <div className={styles.imageWrapper}>
                     <div className={styles.partnerPlaceholder}>
-                      Company name
+                      <Image
+                        src="/img/logo.svg"
+                        alt="Company logo"
+                        width={90}
+                        height={55}
+                        style={{ 
+                          objectFit: 'contain',
+                          opacity: 0.3,
+                          filter: 'brightness(0.8) saturate(0.6)'
+                        }}
+                        priority={false}
+                      />
                     </div>
                   </div>
                 </div>
@@ -182,7 +204,18 @@ const PartnersSection = () => {
                 >
                   <div className={styles.imageWrapper}>
                     <div className={styles.partnerPlaceholder}>
-                      Company name
+                      <Image
+                        src="/img/logo.svg"
+                        alt="Company logo"
+                        width={90}
+                        height={55}
+                        style={{ 
+                          objectFit: 'contain',
+                          opacity: 0.3,
+                          filter: 'brightness(0.8) saturate(0.6)'
+                        }}
+                        priority={false}
+                      />
                     </div>
                   </div>
                 </div>

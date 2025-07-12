@@ -244,8 +244,43 @@
 .partnerPlaceholder {
   padding: 0.4375rem; /* 15px */
   text-align: center;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+/* Добавляем эффекты для плейсхолдера логотипа */
+.partnerCard:hover .partnerPlaceholder {
+  transform: scale(1.05);
+}
+
+.partnerCard:hover .partnerPlaceholder img {
+  opacity: 0.5 !important;
+  filter: brightness(1.1) saturate(0.8) !important;
+}
+
+/* Добавляем тонкий эффект свечения для логотипа */
+.partnerPlaceholder::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.partnerCard:hover .partnerPlaceholder::after {
+  opacity: 1;
 }
 
 /* Responsive adjustments */
