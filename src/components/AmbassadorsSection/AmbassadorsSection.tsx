@@ -221,10 +221,8 @@ const AmbassadorCard: React.FC<AmbassadorCardProps> = ({ ambassador, onSocialCli
 
   const handleLinkClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
-    if (!isMobile) {
-      onSocialClick(ambassador)
-    }
-  }, [ambassador, onSocialClick, isMobile])
+    onSocialClick(ambassador)
+  }, [ambassador, onSocialClick])
 
   return (
     <div 
@@ -252,15 +250,14 @@ const AmbassadorCard: React.FC<AmbassadorCardProps> = ({ ambassador, onSocialCli
         <div className={styles.ambassadorFollowers}>{ambassador.followers}</div>
       </div>
       
-      {!isMobile && (
-        <button
-          onClick={handleLinkClick}
-          className={styles.linkIcon}
-          aria-label={`Visit ${ambassador.username}'s social profiles`}
-        >
-          <ExternalLink size={16} strokeWidth={2.5} />
-        </button>
-      )}
+      {/* Кнопка теперь отображается на всех устройствах */}
+      <button
+        onClick={handleLinkClick}
+        className={styles.linkIcon}
+        aria-label={`Visit ${ambassador.username}'s social profiles`}
+      >
+        <ExternalLink size={16} strokeWidth={2.5} />
+      </button>
     </div>
   )
 }

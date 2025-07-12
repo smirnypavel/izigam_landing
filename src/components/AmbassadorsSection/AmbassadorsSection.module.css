@@ -445,11 +445,11 @@
   font-size: 0.875rem;
 }
 
-/* Фиксированная иконка с лучшей кроссбраузерностью */
+/* УЛУЧШЕННАЯ ИКОНКА ДЛЯ ВСЕХ УСТРОЙСТВ */
 .linkIcon {
   position: absolute;
-  right: 42%;
   bottom: 0.625rem;
+  right: 42%;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
@@ -469,7 +469,6 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  /* Добавляем более четкие границы для Mozilla */
   outline: none;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -525,16 +524,62 @@
   background: linear-gradient(135deg, rgba(250, 153, 255, 1), rgba(163, 153, 255, 1));
 }
 
-/* Увеличенная иконка для мобильных устройств */
+/* Адаптивные размеры иконки для всех устройств */
+@media (max-width: 1200px) {
+  .linkIcon {
+    width: 2.2rem;
+    height: 2.2rem;
+    min-width: 2.2rem;
+    min-height: 2.2rem;
+    right: 40%;
+  }
+}
+
 @media (max-width: 768px) {
   .linkIcon {
-    width: 3.2rem;
-    height: 3.2rem;
-    min-width: 3.2rem;
-    min-height: 3.2rem;
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    right: 38%;
+    bottom: 0.5rem;
+  }
+  
+  .linkIcon svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .linkIcon {
+    width: 1.8rem;
+    height: 1.8rem;
+    min-width: 1.8rem;
+    min-height: 1.8rem;
+    right: 36%;
+    bottom: 0.4rem;
+  }
+  
+  .linkIcon svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .linkIcon {
+    width: 1.6rem;
+    height: 1.6rem;
+    min-width: 1.6rem;
+    min-height: 1.6rem;
     right: 35%;
-    /* Скрываем на мобильных, так как клик будет по всему хексу */
-    display: none;
+    bottom: 0.3rem;
+  }
+  
+  .linkIcon svg {
+    width: 0.8rem;
+    height: 0.8rem;
   }
 }
 
@@ -544,13 +589,7 @@
   height: 1.2rem;
   stroke-width: 2.5px;
   pointer-events: none;
-}
-
-@media (max-width: 480px) {
-  .linkIcon svg {
-    width: 1rem;
-    height: 1rem;
-  }
+  transition: all 0.3s ease;
 }
 
 .ambassadorsToggleBtn {
